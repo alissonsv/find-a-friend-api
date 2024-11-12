@@ -26,3 +26,33 @@ API para adoção de animais
 - [ ] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL
 - [ ] Todas listas de dados precisam estar paginadas com 20 itens por página
 - [ ] O usuário deve ser identificado por um JWT
+
+
+## Diagrama ER
+```mermaid
+erDiagram
+    ORG {
+        int id PK
+        string name
+        string email
+        string password
+        string managerName
+        string whatsapp
+        string address
+        string cep
+        string city
+    }
+    PET {
+        int id PK
+        int orgId FK
+        string name
+        string about
+        string age "enum(PUPPY, ADULT)"
+        string size "enum(SMALL, MEDIUM, LARGE)"
+        string energyLevel "enum(LOW, MEDIUM, HIGH)"
+        string environment "enum(SMALL, MEDIUM, LARGE)"
+        string[] adoptionRequirements
+    }
+
+    ORG ||--o{ PET : has
+```
