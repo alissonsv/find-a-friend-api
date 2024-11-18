@@ -32,27 +32,47 @@ API para adoção de animais
 ```mermaid
 erDiagram
     ORG {
-        int id PK
+        string id PK
         string name
         string email
         string password
-        string managerName
+        string manager_name
         string whatsapp
         string address
         string cep
         string city
+        datetime created_at
+        datetime updated_at
     }
+
     PET {
-        int id PK
-        int orgId FK
+        string id PK
+        string org_id FK
         string name
         string about
         string age "enum(PUPPY, ADULT)"
         string size "enum(SMALL, MEDIUM, LARGE)"
-        string energyLevel "enum(LOW, MEDIUM, HIGH)"
+        string energy_level "enum(LOW, MEDIUM, HIGH)"
         string environment "enum(SMALL, MEDIUM, LARGE)"
-        string[] adoptionRequirements
+        datetime created_at
+        datetime updated_at
+    }
+
+    REQUIREMENT {
+        string id PK
+        string description
+        datetime created_at
+        datetime updated_at
+    }
+
+    PET_REQUIREMENT {
+        string pet_id PK,FK
+        string requirement_id PK,FK
+        datetime created_at
+        datetime updated_at
     }
 
     ORG ||--o{ PET : has
+    PET ||--o{ PET_REQUIREMENT : has
+    REQUIREMENT ||--o{ PET_REQUIREMENT : "is used in"
 ```
