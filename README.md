@@ -56,23 +56,8 @@ erDiagram
         string environment "enum(SMALL, MEDIUM, LARGE)"
         datetime created_at
         datetime updated_at
-    }
-
-    REQUIREMENT {
-        string id PK
-        string description
-        datetime created_at
-        datetime updated_at
-    }
-
-    PET_REQUIREMENT {
-        string pet_id PK,FK
-        string requirement_id PK,FK
-        datetime created_at
-        datetime updated_at
+        json pet_requirements
     }
 
     ORG ||--o{ PET : has
-    PET ||--o{ PET_REQUIREMENT : has
-    REQUIREMENT ||--o{ PET_REQUIREMENT : "is used in"
 ```

@@ -63,34 +63,10 @@ model Pet {
   environment  PetEnvironment
   created_at   DateTime       @default(now())
   updated_at   DateTime       @updatedAt
+  requirements Json
 
   org          Org              @relation(fields: [org_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   org_id       String
-  requirements PetRequirement[]
 
   @@map("pets")
-}
-
-model Requirement {
-  id               String           @id @default(uuid())
-  description      String           @unique
-  created_at       DateTime         @default(now())
-  updated_at       DateTime         @updatedAt
-  pet_requirements PetRequirement[]
-
-  @@map("requirements")
-}
-
-model PetRequirement {
-  pet    Pet    @relation(fields: [pet_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  pet_id String
-
-  requirement    Requirement @relation(fields: [requirement_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  requirement_id String
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  @@id([pet_id, requirement_id])
-  @@map("pet_requirements")
 }
