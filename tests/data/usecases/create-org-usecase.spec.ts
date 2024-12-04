@@ -4,6 +4,7 @@ import type { Org, Prisma } from "@prisma/client";
 
 import { CreateOrgUseCase } from "#/data/usecases/create-org-usecase";
 import type { IOrgRepository } from "#/domain/interfaces/repository/org-repository";
+import { fakeOrg } from "#/tests/mock/fake-org";
 
 function createOrgRepositoryStub(): IOrgRepository {
 	class OrgRepositoryStub implements IOrgRepository {
@@ -15,7 +16,12 @@ function createOrgRepositoryStub(): IOrgRepository {
 				updated_at: new Date(),
 			};
 		}
+
+		async findByEmail(_email: string): Promise<Org | null> {
+			return fakeOrg;
+		}
 	}
+
 	return new OrgRepositoryStub();
 }
 
