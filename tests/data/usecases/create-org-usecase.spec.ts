@@ -38,7 +38,7 @@ function createFakeOrgData() {
 		cep: faker.location.countryCode(),
 		city: faker.location.city(),
 		email: faker.internet.email(),
-		manager_name: faker.person.fullName(),
+		managerName: faker.person.fullName(),
 		name: faker.word.words(2),
 		password: faker.internet.password(),
 		whatsapp: faker.phone.number(),

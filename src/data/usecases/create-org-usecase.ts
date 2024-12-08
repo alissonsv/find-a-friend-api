@@ -6,7 +6,7 @@ interface CreateOrgUseCaseRequest {
 	name: string;
 	email: string;
 	password: string;
-	manager_name: string;
+	managerName: string;
 	whatsapp: string;
 	address: string;
 	cep: string;
@@ -24,7 +24,7 @@ export class CreateOrgUseCase {
 		name,
 		email,
 		password,
-		manager_name,
+		managerName,
 		whatsapp,
 		address,
 		cep,
@@ -36,7 +36,7 @@ export class CreateOrgUseCase {
 			name,
 			email,
 			password: hashedPassword,
-			manager_name,
+			manager_name: managerName,
 			whatsapp,
 			address,
 			cep,
