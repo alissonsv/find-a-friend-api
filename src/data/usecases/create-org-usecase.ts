@@ -1,4 +1,5 @@
 import type { Org } from "@prisma/client";
+import { OrgAlreadyExistsError } from "#/data/errors/org-already-exists";
 import type { IOrgRepository } from "#/domain/interfaces/repository/org-repository";
 import { hashPassword } from "#/utils/password-hash";
 
@@ -30,6 +31,12 @@ export class CreateOrgUseCase {
 		cep,
 		city,
 	}: CreateOrgUseCaseRequest): Promise<CreateOrgUseCaseResponse> {
+		const orgWithSameEmail = await this.orgRepository.findByEmail(email);
+
+		if (orgWithSameEmail) {
+			throw new OrgAlreadyExistsError();
+		}
+
 		const hashedPassword = await hashPassword(password);
 
 		const org = await this.orgRepository.create({

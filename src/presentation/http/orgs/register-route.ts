@@ -1,5 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
+import { OrgAlreadyExistsError } from "#/data/errors/org-already-exists";
 import { makeCreateOrgUseCase } from "#/data/usecases/factories/make-create-org-usecase";
 
 export async function registerRoute(
@@ -19,7 +20,16 @@ export async function registerRoute(
 
 	const parsedBodySchema = registerBodySchema.parse(request.body);
 	const createOrgUseCase = makeCreateOrgUseCase();
-	await createOrgUseCase.execute(parsedBodySchema);
+
+	try {
+		await createOrgUseCase.execute(parsedBodySchema);
+	} catch (error) {
+		if (error instanceof OrgAlreadyExistsError) {
+			return reply.status(409).send(error.message);
+		}
+
+		throw error;
+	}
 
 	return reply.status(201).send();
 }
