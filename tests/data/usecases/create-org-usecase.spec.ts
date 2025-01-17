@@ -7,7 +7,7 @@ import { CreateOrgUseCase } from "#/data/usecases/create-org-usecase";
 import type { IOrgRepository } from "#/domain/interfaces/repository/org-repository";
 import { fakeOrg } from "#/tests/mock/fake-org";
 
-function createOrgRepositoryStub(): IOrgRepository {
+function makeOrgRepositoryStub(): IOrgRepository {
 	class OrgRepositoryStub implements IOrgRepository {
 		async create(data: Prisma.OrgCreateInput): Promise<Org> {
 			return {
@@ -27,7 +27,7 @@ function createOrgRepositoryStub(): IOrgRepository {
 }
 
 function makeSut() {
-	const orgRepositoryStub = createOrgRepositoryStub();
+	const orgRepositoryStub = makeOrgRepositoryStub();
 	const sut = new CreateOrgUseCase(orgRepositoryStub);
 
 	return { sut, orgRepositoryStub };

@@ -6,7 +6,7 @@ import type { IOrgRepository } from "#/domain/interfaces/repository/org-reposito
 import { fakeOrg } from "#/tests/mock/fake-org";
 import { hashPassword } from "#/utils/password-hash";
 
-function createOrgRepositoryStub(): IOrgRepository {
+function makeOrgRepositoryStub(): IOrgRepository {
 	class OrgRepositoryStub implements IOrgRepository {
 		async create(_data: Prisma.OrgCreateInput): Promise<Org> {
 			return fakeOrg;
@@ -26,7 +26,7 @@ function createOrgRepositoryStub(): IOrgRepository {
 }
 
 function makeSut() {
-	const orgRepositoryStub = createOrgRepositoryStub();
+	const orgRepositoryStub = makeOrgRepositoryStub();
 	const sut = new AuthenticateUseCase(orgRepositoryStub);
 
 	return {
