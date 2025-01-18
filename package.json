@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "migrate:test": "dotenv -e .env.test -- npx prisma migrate deploy",
+    "pretest:e2e": "dotenv -e .env.test -- npx prisma migrate deploy",
     "test": "npm run test:unit -- --silent && npm run test:e2e -- --silent",
-    "test:e2e": "npm run migrate:test && dotenv -e .env.test -- jest -c jest.config.e2e.ts",
+    "test:e2e": "dotenv -e .env.test -- jest -c jest.config.e2e.ts --runInBand",
     "test:unit": "jest -c jest.config.unit.ts",
     "test:watch": "jest --watch"
   },

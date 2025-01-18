@@ -4,5 +4,5 @@ export default {
 	...baseConfig,
 	testMatch: ["**/*.test.ts"],
 	displayName: "e2e",
-	globalSetup: "<rootDir>/tests/globalSetup.ts",
+	setupFilesAfterEnv: ["<rootDir>/tests/setup.e2e.ts"],
 };
